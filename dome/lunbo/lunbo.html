@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.lunbo { width: 500px;height: 300px; position: relative; }
+			.lunbo .lunbo_content { width: 100%; height: 100%; perspective:150;-webkit-perspective:150;}
+			.lunbo .lunbo_content div {  }
+			.lunbo .lunboWindow { width: 50%;height: 80%;position:absolute; left: 25%; top: 10%; transition: all 0.7s; }
+			.lunbo .lunboWindow > * { width: 100%;height: 100%; }
+			.lunbo [status='left'] { transform: translate3d(50%,0,-10px);z-index:0; }
+			.lunbo [status='center'] { transform: translate3d(0,0,10px); z-index:1; }
+			.lunbo [status='right'] { transform: translate3d(-50%,0,-10px); z-index:0; }
+			.lunbo .btn_left { position: absolute;left: 0;top: 0;cursor: pointer; height: 100%;overflow: hidden;width: 13px; }
+			.lunbo .btn_right { position: absolute;right: 0;top: 0;cursor: pointer;height: 100%;overflow: hidden;width: 13px; }
+			.lunbo .btn_left .icon { width: 5px;height: 5px;border-top: solid 1px aqua;border-right: solid 1px aqua; transform: rotateZ(-135deg);top: 50%;position: absolute; }
+			.lunbo .btn_right .icon { width: 5px;height: 5px;border-top: solid 1px aqua;border-right: solid 1px aqua; transform: rotateZ(45deg);top: 50%;position: absolute;}
+		</style>
+	</head>
+	<body>
+		<div id='lunbo1' class='lunbo'>
+			<!-- 轮播dom -->
+			<div class='lunbo_content'>
+				<div class='lunboWindow lunbo_left' status='left'>
+					<img src='img/001.jpg' />
+				</div>
+				<div class='lunboWindow lunbo_center' status='center'>
+					<img src='img/002.jpg' />
+				</div>
+				<div class='lunboWindow lunbo_right' status='right'>
+					<img src='img/003.jpg' />
+				</div>
+			</div>
+			<!-- 切换按钮 -->
+			<div style=''>
+				<div class='btn_left' onclick='lb.left();'> 
+					<div class='icon'></div> 
+				</div>
+				<div class='btn_right' onclick='lb.right();'> 
+					<div class='icon'></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var lunbo = function(){
+			this.element = lunbo1;
+		}
+		
+		lunbo.prototype = {
+			right : function(){
+				var content = this.element.querySelector(".lunbo_content");
+				var center = content.querySelector("[status='center']");
+				var left = content.querySelector("[status='left']");
+				var right = content.querySelector("[status='right']");
+				center.setAttribute("status","left");
+				right.setAttribute("status","center");
+				left.setAttribute("status","right");
+			},
+			left  : function(){
+				var content = this.element.querySelector(".lunbo_content");
+				var center = content.querySelector("[status='center']");
+				var left = content.querySelector("[status='left']");
+				var right = content.querySelector("[status='right']");
+				center.setAttribute("status","right");
+				right.setAttribute("status","left");
+				left.setAttribute("status","center");
+			},
+		}
+		
+		var lb = new lunbo();
+		
+	</script>
+</html>

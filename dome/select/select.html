@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src='../../easyUi/easy.ui.js'></script>
+		<link href='../../easyUi/easy.ui.css' rel='stylesheet' />
+	</head>
+	<body>
+		<div>
+			<input id='select' class='easyui_select'>
+		</div>
+		
+		
+		<select class='easyui_select'></select>
+	</body>
+	<script>
+		var data = [
+			{ value : "111" , text : "1111s" },
+			{ value : "112" , text : "1112s" },
+			{ value : "113" , text : "1113s" },
+			{ value : "114" , text : "1114s" },
+			{ value : "115" , text : "1115s" },
+		]
+		
+		var selects = document.getElementById("select");
+		selects.addEventListener("blur",function(){
+			setTimeout(function(){
+				this.selectDom.remove();
+				this.selectDom = null;
+			}.bind(this),100)
+		})
+		
+		selects.addEventListener("focus",function(){
+			createModel({input: this});
+		})
+		
+		//生成选择模板
+		var createModel = function(param){
+			//确定好需要编辑的input;
+			var input = param.input;
+			if( input.selectDom ){
+				return;
+			}
+			var width = input.offsetWidth;
+			var div = document.createElement("div");
+			var html = "";
+			for( var i in data ){
+				html += `<div easy-option-click value='${data[i].value}'>${data[i].text}</div>`;
+			}
+			div.className = "easyui_select_menu"
+			div.innerHTML = html;
+			div.style.width = width+"px";
+			div.addEventListener("click",function(e){
+				var attr = e.target;
+				var f = attr.getAttribute("easy-option-click");
+				if( f !== null ){
+					input.value = attr.innerText;
+					input.values = attr.getAttribute("value");
+				}
+			})
+			input.after(div);
+			input.selectDom = div;
+		}
+	</script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src='../../easyUi/easy.ui.js'></script>
+		<link href='../../easyUi/easy.ui.css' rel='stylesheet' />
+	</head>
+	<body>
+		<div id='app'>
+			<div :for='val in test2' >${ val.test1 }</div>
+			<div :eval class='${test}'>${test1}</div>
+		</div>
+	</body>
+	<script>
+		var app = easyui("app",{
+			data : {
+				test : "liao",
+				test1 : "测试",
+				test2 : [{test1:1},{test1:2},{test1:3}]
+			},
+		})
+	</script>
+</html>

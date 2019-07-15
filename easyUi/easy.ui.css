@@ -1,0 +1,11 @@
+.easyui_select_menu  {
+	border : solid 1px #000000;
+}
+.easyui_select_menu > div {
+	padding : 3px ;
+	font-size: 12px;
+}
+.easyui_select_menu > div:hover {
+	color : #b1b1b1;
+	background: #333333;
+}
